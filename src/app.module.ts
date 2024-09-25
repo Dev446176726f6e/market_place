@@ -2,11 +2,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AdminModule } from './admin/admin.module';
+import { StoreModule } from './store/store.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env', isGlobal: true
+      envFilePath: '.env',
+      isGlobal: true,
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -18,9 +21,11 @@ import { AdminModule } from './admin/admin.module';
       autoLoadModels: true,
       sync: { alter: true },
       synchronize: true,
-      logging: false
+      logging: false,
     }),
-    AdminModule
+    AdminModule,
+    StoreModule,
+    CategoryModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
